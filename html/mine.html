@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../css/mui.min.css" rel="stylesheet" type="text/css" />
+		<link href="../css/iconfont.css" rel="stylesheet" type="text/css" />
+		<link href="../css/common.css" rel="stylesheet" type="text/css" />
+		<link href="../css/mui.min.css" rel="stylesheet" type="text/css" />
+		<link href="../css/reset.css" rel="stylesheet" type="text/css" />
+		<script src="../js/mui.min.js" />
+		<script type="text/javascript">
+			//打开引导
+			// var firstGuide = localStorage.getItem("guide");
+			// if(firstGuide != "yes"){
+			// 	window.location.href='hello.html'; //启动引导页
+			// }
+		</script>
+		<style>
+			.mui-bar-nav~.mui-content .mui-pull-top-pocket {
+				top: 0px;
+			}
+			#headimg {
+				background: #eee;
+			}
+			.bg {
+				height: 170px;
+				background: #13D1BE;
+				/* 一些不支持背景渐变的浏览器 */
+				background: -moz-linear-gradient(top, #13D1BE, rgba(111, 128, 251, 0.7));
+				background: -webkit-gradient(linear, 0 0, 0 bottom, from(#13D1BE), to(rgba(111, 128, 251, 0.7)));
+				background: -o-linear-gradient(top, #13D1BE, rgba(111, 128, 251, 0.7));
+				position: relative;
+			}
+			.borf {
+				border: 3px solid #fff;
+			}
+			#editSignature {
+				width: 80%;
+				margin-left: 10%;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				position: relative;
+			}
+			body{
+				font-size: 14px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content pt0 mui-scroll-wrapper" id="pullrefresh">
+			<div class="mui-scroll">
+				<ul class="mui-table-view mb1rem bg tblv-nl" style="position: relative;">
+					<li class="mui-text-center ptb10" id="user_warp">
+						<div class="ckecklogin" id="goLogin" data-loginbackid="my/user.html" id="user_warp">
+							<img class="bor-r50p mt15 img50 borf" src="../images/defuser.jpg" />
+							<h5 class="cor-fff lh30">欢迎您 </h5>
+						</div>
+					</li>
+					<canvas id="canvas" height="105" style="position:absolute;bottom: 0;left:0px;z-index:-1;width: 100%;"></canvas>
+				</ul>
+				<ul class="mui-table-view mb1rem tblv-nl">
+					<li class="mui-table-view-cell">
+						帐号：<span id="span_nickname" style="float: right;margin-right: 10px;"></span>
+					</li>
+					<li class="mui-table-view-cell">
+						星级：<span id="span_vip" style="float: right;margin-right: 10px;">游客</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<a id="mySetting" class="mui-navigate-right ckecklogin" data-loginevent="loginEvent.mySetting()" data-loginbackid="my/mySetting.html">关于</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<nav class="mui-bar mui-bar-tab">
+		    <a class="mui-tab-item" id="main" data-href="main.html" data-index="0">
+		        <span class="mui-icon iconfont icon-home"></span>
+		        <span class="mui-tab-label">首页</span>
+		    </a>
+		    <a class="mui-tab-item" id="vedio" data-href="vedio.html" data-index="3">
+		        <span class="mui-icon iconfont icon-forum"></span>
+		        <span class="mui-tab-label">VIP</span>
+		    </a>
+		    <a class="mui-tab-item mui-active" id="mine" data-href="mine.html" data-index="4">
+		        <span class="mui-icon iconfont icon-me1"></span>
+		        <span class="mui-tab-label">我的</span>
+		    </a>
+		</nav>
+		<script>
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+			document.getElementById('main').addEventListener('tap', function() {
+			  mui.openWindow({
+				url: 'main.html', 
+				show:{
+				  autoShow:false
+				}
+			  });
+			});
+			document.getElementById('mine').addEventListener('tap', function() {
+			  mui.openWindow({
+				url: 'mine.html', 
+				show:{
+				  autoShow:false
+				}
+			  });
+			});
+			document.getElementById('vedio').addEventListener('tap', function() {
+			  mui.openWindow({
+				url: 'vedio.html', 
+				show:{
+				  autoShow:false
+				}
+			  });
+			});
+		</script>
+	</body>
+</html>
