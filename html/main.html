@@ -12,11 +12,6 @@
 		<link href="../css/reset.css" rel="stylesheet" type="text/css" />
 		<script src="../js/mui.min.js" />
 		<script type="text/javascript">
-			//打开引导
-			// var firstGuide = localStorage.getItem("guide");
-			// if(firstGuide != "yes"){
-			// 	window.location.href='hello.html'; //启动引导页
-			// }
 		</script>
 		<style>
 			.mui-bar-nav~.mui-content .mui-pull-top-pocket {
@@ -64,9 +59,8 @@
 			<ul class="mui-table-view" style="margin-bottom: 20px;">
 				<li class="mui-table-view-cell mui-media">
 					<a href="javascript:;">
-						<video id="video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" 
-						poster="http://58.246.184.99:801/20190624/0001180614000058_20190624163611_inCarImg.jpeg"
-						 width="100%" >
+						<video id="video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" poster="http://58.246.184.99:801/20190624/0001180614000058_20190624163611_inCarImg.jpeg"
+						 width="100%">
 							<source src="http://124.74.252.163:801/20190624/0001180614000058_20190624163611_inCarVideo.mp4" type="video/mp4">
 						</video>
 						<div class="mui-media-body">
@@ -77,7 +71,7 @@
 				<li class="mui-table-view-cell mui-media">
 					<a href="javascript:;">
 						<video id="video_2" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" poster="http://58.246.184.99:801/20190624/0001180614000058_20190624163611_inCarImg.jpeg"
-						 width="100%" >
+						 width="100%">
 							<source src="http://124.74.252.163:801/20190624/0001180614000058_20190624163611_inCarVideo.mp4" type="video/mp4">
 						</video>
 						<div class="mui-media-body">
@@ -88,7 +82,7 @@
 				<li class="mui-table-view-cell mui-media">
 					<a href="javascript:;">
 						<video id="video_3" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" poster="http://58.246.184.99:801/20190624/0001180614000058_20190624163611_inCarImg.jpeg"
-						 width="100%" >
+						 width="100%">
 							<source src="http://124.74.252.163:801/20190624/0001180614000058_20190624163611_inCarVideo.mp4" type="video/mp4">
 						</video>
 						<div class="mui-media-body">
@@ -99,7 +93,7 @@
 				<li class="mui-table-view-cell mui-media">
 					<a href="javascript:;">
 						<video id="video_4" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" poster="http://58.246.184.99:801/20190624/0001180614000058_20190624163611_inCarImg.jpeg"
-						 width="100%" >
+						 width="100%">
 							<source src="http://124.74.252.163:801/20190624/0001180614000058_20190624163611_inCarVideo.mp4" type="video/mp4">
 						</video>
 						<div class="mui-media-body">
@@ -137,30 +131,22 @@
 					bounce: true, //滚动条是否有弹力默认是true
 					indicators: false, //是否显示滚动条,默认是true
 				});
+				mui.post('http://124.74.252.162:1122/common/log/devices', {
+					address: '海防路（西苏州路--淮安路）JAZ-055'
+				}, function(data) {
+				}, 'json');
 			})(mui);
 			document.getElementById('main').addEventListener('tap', function() {
-				mui.openWindow({
-					url: 'main.html',
-					show: {
-						autoShow: false
-					}
-				});
+				plus.webview.currentWebview().hide();
+				plus.webview.open('main.html', 'main.html');
 			});
 			document.getElementById('mine').addEventListener('tap', function() {
-				mui.openWindow({
-					url: 'mine.html',
-					show: {
-						autoShow: false
-					}
-				});
+				plus.webview.currentWebview().hide();
+				plus.webview.open('mine.html', 'main.html');
 			});
 			document.getElementById('vedio').addEventListener('tap', function() {
-				mui.openWindow({
-					url: 'vedio.html',
-					show: {
-						autoShow: false
-					}
-				});
+				plus.webview.currentWebview().hide();
+				plus.webview.open('vedio.html', 'main.html');
 			});
 		</script>
 	</body>

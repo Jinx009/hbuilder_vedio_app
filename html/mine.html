@@ -95,28 +95,34 @@
 				swipeBack:true //启用右滑关闭功能
 			});
 			document.getElementById('main').addEventListener('tap', function() {
-			  mui.openWindow({
-				url: 'main.html', 
-				show:{
-				  autoShow:false
-				}
-			  });
+				// mui.openWindow({
+				// 	url: 'main.html',
+				// 	show: {
+				// 		autoShow: false
+				// 	}
+				// });
+				plus.webview.currentWebview().hide(); 
+				plus.webview.open('main.html','main.html');
 			});
 			document.getElementById('mine').addEventListener('tap', function() {
-			  mui.openWindow({
-				url: 'mine.html', 
-				show:{
-				  autoShow:false
-				}
-			  });
+				// mui.openWindow({
+				// 	url: 'mine.html',
+				// 	show: {
+				// 		autoShow: false
+				// 	}
+				// });
+				plus.webview.currentWebview().hide(); 
+				plus.webview.open('mine.html','main.html');
 			});
 			document.getElementById('vedio').addEventListener('tap', function() {
-			  mui.openWindow({
-				url: 'vedio.html', 
-				show:{
-				  autoShow:false
-				}
-			  });
+				// mui.openWindow({
+				// 	url: 'vedio.html',
+				// 	show: {
+				// 		autoShow: false
+				// 	}
+				// });
+				plus.webview.currentWebview().hide(); 
+				plus.webview.open('vedio.html','main.html');
 			});
 		</script>
 	</body>
