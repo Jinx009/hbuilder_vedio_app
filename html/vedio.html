@@ -62,7 +62,7 @@
 		</header>
 		<div class="mui-content pt0 mui-scroll-wrapper" style="margin-top: 40px;margin-bottom: 60px;padding-bottom: 60px;" id="pullrefresh">
 			<ul class="mui-table-view" style="margin-bottom: 20px;" id="content">
-				
+
 			</ul>
 		</div>
 		<nav class="mui-bar mui-bar-tab">
@@ -81,54 +81,56 @@
 		</nav>
 		<script>
 			mui.init({
-				swipeBack: true //启用右滑关闭功能
+				swipeBack: true, //启用右滑关闭功能
 			});
-			(function($) {
-				$(".mui-scroll-wrapper").scroll({
-					bounce: true, //滚动条是否有弹力默认是true
-					indicators: false, //是否显示滚动条,默认是true
-				});
-				var userName = localStorage.getItem("userName");
-				if (userName != null && userName != '') {
-					var userLevel = localStorage.getItem("userLevel");
-					if (userLevel != null && userLevel != '' && userLevel == 1) {
-						mui.get('http://driver.amize.cn/f/pro_vedio/list?level=1', {
-							level: '1'
-						}, function(data) {
-							var htmlStr = '';
-							var _d = data.data;
-							if (_d != '' && _d != null) {
-								for (var i = 0; i < _d.length; i++) {
-									htmlStr += '<li class="mui-table-view-cell mui-media">';
-									htmlStr += '<a href="javascript:;">';
-									htmlStr += '<video  class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" ';
-									htmlStr += 'poster="' + _d[i].picPath + '" width="100%">';
-									htmlStr += '<source src="' + _d[i].vedioPath + '" type="video/mp4"></video>';
-									htmlStr += '<div class="mui-media-body">';
-									htmlStr += '<p style="margin-top: 10px;" class="mui-ellipsis">' + _d[i].name + '</p>';
-									htmlStr += '</div></a></li>';
+			mui.plusReady(function() {
+				(function($) {
+					$(".mui-scroll-wrapper").scroll({
+						bounce: true, //滚动条是否有弹力默认是true
+						indicators: false, //是否显示滚动条,默认是true
+					});
+					var userName = localStorage.getItem("userName");
+					if (userName != null && userName != '') {
+						var userLevel = localStorage.getItem("userLevel");
+						if (userLevel != null && userLevel != '' && userLevel == 1) {
+							mui.get('http://driver.amize.cn/f/pro_vedio/list?level=1', {
+								level: '1'
+							}, function(data) {
+								var htmlStr = '';
+								var _d = data.data;
+								if (_d != '' && _d != null) {
+									for (var i = 0; i < _d.length; i++) {
+										htmlStr += '<li class="mui-table-view-cell mui-media">';
+										htmlStr += '<a href="javascript:;">';
+										htmlStr += '<video  class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" ';
+										htmlStr += 'poster="' + _d[i].picPath + '" width="100%">';
+										htmlStr += '<source src="' + _d[i].vedioPath + '" type="video/mp4"></video>';
+										htmlStr += '<div class="mui-media-body">';
+										htmlStr += '<p style="margin-top: 10px;" class="mui-ellipsis">' + _d[i].name + '</p>';
+										htmlStr += '</div></a></li>';
+									}
 								}
-							}
-							document.getElementById("content").innerHTML = htmlStr;
-						}, 'json');
+								document.getElementById("content").innerHTML = htmlStr;
+							}, 'json');
+						} else {
+							mui.alert('您无权限操作，请升级至VIP！', '提示', '确定', function() {}, []);
+						}
 					} else {
 						mui.alert('您无权限操作，请升级至VIP！', '提示', '确定', function() {}, []);
 					}
-				} else {
-					mui.alert('您无权限操作，请升级至VIP！', '提示', '确定', function() {}, []);
-				}
-			})(mui);
+				})(mui);
+			})
 			document.getElementById('main').addEventListener('tap', function() {
 				plus.webview.currentWebview().hide();
-				plus.webview.open('main.html', 'main.html');
+				plus.webview.open('main.html', 'vedio.html');
 			});
 			document.getElementById('mine').addEventListener('tap', function() {
 				plus.webview.currentWebview().hide();
-				plus.webview.open('mine.html', 'main.html');
+				plus.webview.open('mine.html', 'vedio.html');
 			});
 			document.getElementById('vedio').addEventListener('tap', function() {
 				plus.webview.currentWebview().hide();
-				plus.webview.open('vedio.html', 'main.html');
+				plus.webview.open('vedio.html', 'vedio.html');
 			});
 		</script>
 	</body>

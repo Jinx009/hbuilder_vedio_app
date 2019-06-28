@@ -52,7 +52,7 @@
 	</head>
 
 	<body>
-		<div class="mui-content pt0 mui-scroll-wrapper" id="pullrefresh">
+		<div class="mui-content pt0 mui-scroll-wrapper">
 			<div class="mui-scroll">
 				<ul class="mui-table-view mb1rem bg tblv-nl" style="position: relative;">
 					<li class="mui-text-center ptb10" id="user_warp">
@@ -74,6 +74,15 @@
 						<a id="mySetting" class="mui-navigate-right ckecklogin" data-loginevent="loginEvent.mySetting()" data-loginbackid="my/mySetting.html">关于</a>
 					</li>
 				</ul>
+			</div>
+			<div class="mui-scroll" style="margin-top: 430px;">
+				<div class="loginformwarp">
+					<div class="m1rem">
+						<div>
+							<button id='btn_login' class="mui-btn mui-btn-block btn-ok">退出登录</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<nav class="mui-bar mui-bar-tab">
@@ -103,27 +112,38 @@
 				var userLevel = localStorage.getItem("userLevel");
 				if(userName!=''&&userName!=null){
 					document.getElementById("userName").innerText = userName;
+					document.getElementById("user").innerText = '欢迎您';
 				}else{
+					document.getElementById("user").innerText = '点击登录';
+					document.getElementById('user').addEventListener('tap', function() {
+						plus.webview.currentWebview().hide(); 
+						plus.webview.open('login/login.html','mine.html');
+					});
 					document.getElementById("userName").innerText = '未登录';
 				}
 				if(userLevel!=''&&userLevel!=null&&userLevel==1){
 					document.getElementById("level").innerText = '至尊VIP';
 				}else{
-					
 					document.getElementById("level").innerText = '游客';
 				}
 			})(mui);
 			document.getElementById('main').addEventListener('tap', function() {
 				plus.webview.currentWebview().hide(); 
-				plus.webview.open('main.html','main.html');
+				plus.webview.open('main.html','mine.html');
 			});
 			document.getElementById('mine').addEventListener('tap', function() {
 				plus.webview.currentWebview().hide(); 
-				plus.webview.open('mine.html','main.html');
+				plus.webview.open('mine.html','mine.html');
 			});
 			document.getElementById('vedio').addEventListener('tap', function() {
 				plus.webview.currentWebview().hide(); 
-				plus.webview.open('vedio.html','main.html');
+				plus.webview.open('vedio.html','mine.html');
+			});
+			document.getElementById('btn_login').addEventListener('tap', function() {
+				localStorage.setItem("userName",'');
+				localStorage.setItem("userLevel",'');
+				plus.webview.currentWebview().hide(); 
+				plus.webview.open('login/login.html','mine.html');
 			});
 		</script>
 	</body>

@@ -4,11 +4,18 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/iconfont.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/common.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/mui.min.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/reset.css" rel="stylesheet" type="text/css" />
+		<script src="../../js/mui.min.js" />
 		<script type="text/javascript">
-			document.write('<script src="../../js/fix.js?rd=?rd=' + Math.random() + '"><\/script>');
-		</script>
-		<script type="text/javascript">
-			link(['../../css/reset.css']);
+			//打开引导
+			// var firstGuide = localStorage.getItem("guide");
+			// if(firstGuide != "yes"){
+			// 	window.location.href='hello.html'; //启动引导页
+			// }
 		</script>
 		<title></title>
 	</head>
@@ -16,8 +23,8 @@
 	<body class="bg-fff">
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back iconfont icon-close mui-pull-left"></a>
-			<h1 class="mui-title">帐号密码登录</h1>
-			<a class="mui-pull-right head-rightbtn" id="btn_reg">注册</a>
+			<h1 class="mui-title">帐号登录/登录</h1>
+			<a class="mui-pull-right head-rightbtn" id="btn_reg"></a>
 		</header>
 		<div class="mui-content mui-scroll-wrapper scroll">
 			<div class="mui-scroll">
@@ -25,32 +32,51 @@
 					<div class="m1rem">
 						<div class="input-group">
 							<div class="mui-input-row">
-								<input value="1380000000" id='inpt_mobile' type="text" class="mui-input-clear mui-input bgc-f2 bor-no" placeholder="请输入手机号">
+								<input value="" id='userName' type="text" class="mui-input-clear mui-input bgc-f2 bor-no" placeholder="请输入手机号">
 							</div>
 							<div class="mui-input-row">
-								<input value="123456" id='inpt_pwd' type="password" class="mui-input-clear mui-input bgc-f2 bor-no" placeholder="请输入密码">
+								<input value="" id='pwd' type="password" class="mui-input-clear mui-input bgc-f2 bor-no" placeholder="请输入密码">
 							</div>
 						</div>
 						<div>
-							<button id='btn_login' class="mui-btn mui-btn-block btn-ok">登录</button>
-							<div class="mt15">
-								<button class="cor-lan bor-no" id='btn_forgetpwd'>忘记密码</button>
-								<button class="cor-lan bor-no mui-pull-right" id='btn_mobilelogin'>手机登录</button>
-							</div>
-						</div>
-					</div>
-					<div class="oauthwarp">
-						<div class="oauth-title"><span>一键登录</span></div>
-						<div id="oauth-area">
+							<button id='btn_login' class="mui-btn mui-btn-block btn-ok">登录/注册</button>
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
-		<script type="text/javascript">
-			//必须顺序加载
-			script(['../../js/login/OAuth.js', '../../js/login/login.js']);
+		<script>
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			(function($) {
+				$(".mui-scroll-wrapper").scroll({
+					bounce: true, //滚动条是否有弹力默认是true
+					indicators: false, //是否显示滚动条,默认是true
+				});
+			})(mui);
+			mui.plusReady(function() {
+				document.getElementById('btn_login').addEventListener('tap', function() {
+					var userName = mui('#userName')[0].value;
+					var pwd = mui('#pwd')[0].value;
+					mui.post("http://driver.amize.cn/f/pro_user/login", {
+							userName: userName,
+							pwd: pwd
+						},
+						function(data) {
+							if (data.code == '200') {
+								mui.alert('登录成功', '提示', '确定', function() {
+									localStorage.setItem("userName",data.data.userName);
+									localStorage.setItem("userLevel",data.data.userLevel);
+									plus.webview.currentWebview().hide(); 
+									plus.webview.open('../mine.html','login.html');
+								}, []);
+							}else{
+								mui.alert(data.msg, '提示', '确定', function() {}, []);
+							}
+						}, 'json');
+				});
+			})
 		</script>
 	</body>
 
